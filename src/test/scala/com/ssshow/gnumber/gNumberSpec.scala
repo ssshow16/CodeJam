@@ -34,9 +34,9 @@ class gNumberSpec extends Specification {
     }
 
     "start" >> {
-      gNumber.start(36300,1) 
-
-      1 == 1
+      gNumber.findWinner(36) == "Seymour" 
+      // gNumber.findWinner(36300) == "Laurence" 
+      // gNumber.findWinner(36300) == "Laurence" 
     }
   }
 }
