@@ -26,8 +26,9 @@ object gNumber {
 
   def findWinner(N: Long) : String = {
     def canLaurencedWin(value:Long, isLaurenced:Boolean) : Boolean = {
-      if(checkGNumber(value) && isLaurenced) false
-      else {
+      if(checkGNumber(value)){
+        if(isLaurenced == true) false else true
+      } else {
         val factors = factorization(value).groupBy(x=>x) map { case (k,v) => (k,v.size) } toList
 
         val nextValues = factors.map{ case (f,s) => nextValue(value,f)}
