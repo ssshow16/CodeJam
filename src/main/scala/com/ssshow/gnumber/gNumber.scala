@@ -9,8 +9,8 @@ import scala.io.Source
 object gNumber {
 
   def main(args: Array[String]) {
-    val in = Source.fromFile(new File("large.in"))
-    val out = new PrintStream(new File("large.out"))
+    val in = Source.fromFile(new File("small2.in"))
+    val out = new PrintStream(new File("small.out"))
     try {
       process(in.getLines) { s: String => out.println(s) }
     } finally {
@@ -26,16 +26,39 @@ object gNumber {
 
   def findWinner(N: Long) : String = {
     def canLaurencedWin(value:Long, isLaurenced:Boolean) : Boolean = {
+
+
+        println(s"canLaurencedWin : $value, $isLaurenced")
+
       if(checkGNumber(value)){
-        if(isLaurenced == true) false else true
+        if(isLaurenced == true) {
+          println(false)
+          false 
+        } else {
+          println(true)
+          true
+        }
       } else {
         val factors = factorization(value).groupBy(x=>x) map { case (k,v) => (k,v.size) } toList
 
+        println(s"factors : $factors")
+
         val nextValues = factors.map{ case (f,s) => nextValue(value,f)}
+
+        println(s"nextValues : $nextValues")
+
         if(nextValues.exists(checkGNumber)) {
-          if(isLaurenced == true) true else false
+          if(isLaurenced == true) {
+            println(true)
+            true 
+          }else{
+            println(false)
+            false
+          }
         }else {
-          nextValues.map(nv => canLaurencedWin(nv,!isLaurenced)).exists(_ == true)
+          val result = nextValues.map(nv => canLaurencedWin(nv,!isLaurenced)).exists(_ == true)
+          println(result)
+          result
         }        
       }
     }

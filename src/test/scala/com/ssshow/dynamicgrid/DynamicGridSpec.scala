@@ -16,9 +16,13 @@ class DynamicGridSpec extends Specification {
         Array(0,1,0,0),
         Array(1,1,1,1))
 
-      val linkMatrix = DynamicGrid.makeLinkMatrix(grid,4,4)
+      val link = DynamicGrid.makeLink(grid)
 
-      1 == 1
+      link must_== Array(
+        Array(-1, 1,-1, 3),
+        Array(-1,-1, 6,-1),
+        Array(-1,9,-1,-1),
+        Array(9,9,9,9))
     }
 
   }
